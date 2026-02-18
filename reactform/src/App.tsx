@@ -1,13 +1,18 @@
-import { useState } from 'react'
+import React, { useState, type SyntheticEvent } from 'react'
 import './App.css'
 
 function App() {
   const [title, settitle] = useState('')
 
 
-  const submithandler = (e)=>{
+  const submithandler = (e: SyntheticEvent <HTMLFormElement>)=>{
     e.preventDefault();
-    console.log("you submited :  ",title);
+    if(title === ''){
+      return;
+    }else{
+
+      console.log("you submited :",title);
+    }
     settitle(' ')
   }
 
