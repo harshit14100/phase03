@@ -15,6 +15,8 @@ const Timer = () => {
       setIsActive(false);
       clearInterval(interval);
     }
+    console.log("useeffect is running");
+    
 
     return () => clearInterval(interval);
   }, [isActive, seconds]);

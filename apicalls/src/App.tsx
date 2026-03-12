@@ -1,45 +1,23 @@
-import { useEffect, useState } from 'react'
-import './App.css'
-import { json } from 'stream/consumers'
+import React, { useState } from 'react'
+import axios from 'axios'
 
-function App() {
-  const [content, setcontent] = useState('posts')
-  const [user, setuser] = useState([])
+const App = () => {
+  const [data, setdata] = useState([])
 
-  const [error, seterror] = useState(null)
 
-  const getdata = (()=>{
-    const data = fetch('https://jsonplaceholder.typicode.com/todos/1')
-    // console.log(data);
-  })
-
-  useEffect(()=>{
-    fetch('https://jsonplaceholder.typicode.com/users')
-    .then((response)=>{
-      if(!response.ok){
-        throw new Error("network response was not ok") 
-      }
-      return response.json()
-    }).then((data)=>{
-      setuser(data);
-      seterror(null);
-    }).catch((err)=>{
-      seterror(err.message)
-    })
+  const getdata = async ()=>{
+    const response =   await axios.get('https://picsum.photos/v2/list')
+    // console.log(response.data);
+    setdata(response.data)
     
-  },[content])
-
+  }
   return (
-    <>
-      <div className='bg-black h-screen p-10 '>
-        <div>
-        <button onClick={()=>setcontent('posts')} className='text-zinc-400 border-2 border-amber-50'>posts</button>
-        <button onClick={()=>{setcontent('likes')}} className='text-zinc-400 border-2 border-amber-50'>likes</button>
-        <button onClick={()=>{setcontent('comments')}} className='text-zinc-400 border-2 border-amber-50'>comments</button>
-        </div>
-      <h1 className='text-white p-20 text-8xl'>{content}</h1>
-      </div>
-    </>
+    <div>
+      <button onClick={getdata} className=''>click </button>
+      <div>{data.map((elem, idx)=>{
+        return <h1 className='text-5xl font-bold '>hello {elem.author} {idx}</h1>
+      })}</div>
+    </div>
   )
 }
 
