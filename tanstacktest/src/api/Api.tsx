@@ -3,7 +3,7 @@ import type { Post } from "../types/Type";
 
 
 const api = axios.create({
-    baseURL : "https://jsonplaceholders.typicode.com"
+    baseURL : "https://jsonplaceholder.typicode.com"
 })
 
 export const fetchposts = async():Promise<Post[]>=>{
