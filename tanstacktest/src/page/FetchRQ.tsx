@@ -9,6 +9,7 @@ function FetchRQ() {
   const {data, isLoading , isError, error} = useQuery({
     queryKey:['posts'],
     queryFn:fetchposts,
+    staleTime: 1000 * 60 
   })
 
   if(isLoading)return <p>Loading...</p>
